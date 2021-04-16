@@ -1,3 +1,17 @@
----
-title: bye world
----
+
+name:"Elainalytics"
+output_dir: "."
+navbar:
+  title: Elainalytics
+  left:
+    text: "Home"
+    href: index.html
+    text:"Project"
+    href: project.html
+    text: "About"
+    href: about.html
+    
+output:
+  html_document:
+    theme: simplex
+    highlight: textmate
