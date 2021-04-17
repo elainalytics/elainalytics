@@ -1,0 +1,13 @@
+---
+title: "about"
+author: "Elaina"
+date: "4/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Hi this is Elaina's about page.
+
