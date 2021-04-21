@@ -1,14 +1,14 @@
 name: "Elainalytics"
 output_dir: "."
 navbar:
-  title: Elainalytics
+  title: "Elainalytics"
   left:
-    text: "Home"
-    href: index.html
-    text: "Project"
-    href: project.html
-    text: "About"
-    href: about.html
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Project"
+      href: project.html
     
 output:
   html_document:
