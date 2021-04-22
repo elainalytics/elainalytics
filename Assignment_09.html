@@ -243,9 +243,6 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="about.html">About</a>
 </li>
 <li>
@@ -550,12 +547,8 @@ index &lt;-
                       p = 0.8, list = FALSE)
 for_decisiontree &lt;-
   both_users %&gt;% select(-1,-2,-3,-4)
-train &lt;- for_decisiontree[index, ]</code></pre>
-<pre><code>## Warning: The `i` argument of ``[`()` can&#39;t be a matrix as of tibble 3.0.0.
-## Convert to a vector.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<pre class="r"><code>test  &lt;- for_decisiontree[-index, ]
+train &lt;- for_decisiontree[index, ]
+test  &lt;- for_decisiontree[-index, ]
 simple_model &lt;- rpart(user ~ ., data = train, method = &quot;class&quot;)
 rpart.plot(simple_model, yesno = 2)</code></pre>
 <p><img src="Assignment_09_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>

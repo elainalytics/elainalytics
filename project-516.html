@@ -243,9 +243,6 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="about.html">About</a>
 </li>
 <li>
@@ -382,19 +379,6 @@ mask_use2 %&gt;% mutate(cluster = mask_clusters_single) -&gt; mask_use_single
 mask_use_single %&gt;% 
   group_by(cluster) %&gt;% 
   summarise_all(funs(mean(.,  na.rm = T)))</code></pre>
-<pre><code>## Warning: `funs()` is deprecated as of dplyr 0.8.0.
-## Please use a list of either functions or lambdas: 
-## 
-##   # Simple named list: 
-##   list(mean = mean, median = median)
-## 
-##   # Auto named with `tibble::lst()`: 
-##   tibble::lst(mean, median)
-## 
-##   # Using lambdas
-##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## # A tibble: 2 x 6
 ##   cluster  NEVER RARELY SOMETIMES FREQUENTLY ALWAYS
 ##     &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
@@ -558,16 +542,10 @@ comp_mask_clusterdata  %&gt;%
 <p>It looks like of counties in the entire sample, 68% of counties are “Compliant” if they have a family household income of less than $86,000. 40% are counties that have a compliant probability of 48% if the households make more than 86,000. 60% are counties making less than 86,000, with 83% of them non-compliant.</p>
 <pre class="r"><code>library(caret)
 library(rpart.plot)
-library(Metrics)</code></pre>
-<pre><code>## Warning: package &#39;Metrics&#39; was built under R version 4.0.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Metrics&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:caret&#39;:
-## 
-##     precision, recall</code></pre>
-<pre class="r"><code>library(tidycensus)</code></pre>
-<pre><code>## Warning: package &#39;tidycensus&#39; was built under R version 4.0.3</code></pre>
-<pre class="r"><code>set.seed(123)
+library(Metrics)
+library(tidycensus)
+
+set.seed(123)
 mask_data %&gt;% mutate(Mask_Use0 = 
            case_when( `Mask_Chance` &lt; 0.60 ~ &quot;Non-Compliers&quot;,
                       `Mask_Chance` &gt;= 0.60 ~ &quot;Compliers&quot;)) -&gt; 

@@ -224,11 +224,13 @@ ggplot(tiktok_sentiment_analysis2, aes(x=word, y=n, fill = n)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
   labs(y="count", title="Tik Tok Sentiment")
 ```
-We also want to visualize common words on Facebook and Tiktok by wordccloud
+
+We also want to visualize common words on Facebook and Tiktok by wordccloud. The visual depiction indicates to us that "learn", "center" and "report" are common words, with more secondary common words such as "secure" page", and "visit" for Facebook account engagement. This could be that Facebook users tweet about account issues. Whereas, TikTok has "top", "tomorrow", and "prizes" as common words, and more secondary common words such as "winner, "nominating", and "grand", indicating that the social media platform likes to promote competitions or giveaways, which makes sense given their younger demographics might enjoy these types of rewards and games.
 
 ```{r, warning = FALSE, message = FALSE}
 facebook_cloud <- fb_words  %>% count(word) %>% arrange(-n)
 wordcloud(facebook_cloud$word, facebook_cloud$n, max.words = 200, colors = c("#00B2FF", "red", "#FF0099", "#6600CC", "green", "orange", "blue", "brown"))
+
 tiktok_cloud <- tiktok_words  %>% count(word) %>% arrange(-n)
 wordcloud(tiktok_cloud$word, tiktok_cloud$n, max.words = 200, colors = c("#00B2FF", "red", "#FF0099", "#6600CC", "green", "orange", "blue", "brown"))
 ```
@@ -442,3 +444,6 @@ gb_test_accuracy <-
   as.numeric(gb_test_confusion$overall[1])
 gb_test_confusion
 ```
+
+## Conclusion
+Looking at the analyses, it seems that the Facebook and TikTok account and users tweet about these two social media platforms for different reasons. People tweeting about Facebook are likely to be reporting their account issues, which are associated with words such as "secure" and "trust." Whereas, people tweeting about TikTok seem to be participating in prize giveaways, which is associated with "anticipation" words such as "winning" and "tomorrow." Overall, these analyses make sense given the different demographics of the two social media platforms. 
