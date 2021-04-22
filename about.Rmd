@@ -1,7 +1,7 @@
 ---
-title: "about"
+title: "About"
 author: "Elaina"
 ---
 
-Hi this is Elaina's about page.
+Hi, I'm an Master of Behavioral and Decision Sciences student at Penn taking BDS516 - Data Science and Quantitative Modelling.
 

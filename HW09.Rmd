@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Introduction
-We will be examining the difference in Tweet communications between TikTok and Facebook. These are two popular social media platforms but with very different target audiences, thus the two brands could differ in their communication styles and language.
+We will be examining the difference in Tweet communications between TikTok and Facebook. These are two popular social media platforms in a similar industry but with very different target audiences, thus the two brands and their audiences could differ in their communication styles and language.
 
 ## Analysis
 
