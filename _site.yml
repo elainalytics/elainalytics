@@ -8,7 +8,7 @@ navbar:
     - text: "About"
       href: about.html
     - text: "HW 09"
-      href: hw09.html
+      href: HW09.html
     
 output:
   html_document:

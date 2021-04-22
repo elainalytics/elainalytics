@@ -324,7 +324,7 @@ facebook %&gt;% head()</code></pre>
   scale_y_continuous(labels = percent_format()) +
   geom_line() +
   ggtitle(&#39;Facebook Source Breakdown by Hour&#39;)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>tiktok %&gt;%
   count(source, hour = hour(with_tz(created_at, &quot;EST&quot;))) %&gt;%
   mutate(percent = n/sum(n)) %&gt;%
@@ -333,7 +333,7 @@ facebook %&gt;% head()</code></pre>
   scale_y_continuous(labels = percent_format()) +
   geom_line() +
   ggtitle(&#39;Tiktok Source Breakdown by Hour&#39;)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <pre class="r"><code>fb_wordcounts &lt;- 
   facebook %&gt;%
   mutate(tweetLength = str_length(text)) %&gt;% 
@@ -349,9 +349,9 @@ writeLines(c(paste0(&quot;Facebook Mean Tweet Length: &quot;,
 <pre><code>## Facebook Mean Tweet Length: 163.370231394622
 ## TikTok Mean Tweet Length: 112.916405760801</code></pre>
 <pre class="r"><code>hist(tiktok_wordcounts$tweetLength)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>hist(fb_wordcounts$tweetLength)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <pre class="r"><code>fb_picture_counts &lt;- 
   facebook %&gt;%
   filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
@@ -365,11 +365,11 @@ tiktok_picture_counts &lt;-
 barplot(fb_picture_counts$n, 
         names.arg=c(&quot;No picture/link&quot;, &quot;Picture/link&quot;),
         main = &quot;Facebook # of Tweets with and without pics/link&quot;)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>barplot(tiktok_picture_counts$n, 
         names.arg=c(&quot;No picture/link&quot;, &quot;Picture/link&quot;),
         main = &quot;Tiktok # of Tweets with and without pics/link&quot;)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <pre class="r"><code>reg &lt;- &quot;([^A-Za-z\\d#@&#39;]|&#39;(?![A-Za-z\\d#@]))&quot;
 # Unnest the text strings into a data frame of words
 fb_words &lt;- 
@@ -413,7 +413,7 @@ head(fb_words)</code></pre>
   geom_bar(stat = &quot;identity&quot;) +
   ylab(&quot;Occurrences&quot;) +
   coord_flip()</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>tiktok_words %&gt;%
   count(word, sort = TRUE) %&gt;%
   head(20) %&gt;%
@@ -422,7 +422,7 @@ head(fb_words)</code></pre>
   geom_bar(stat = &quot;identity&quot;) +
   ylab(&quot;Occurrences&quot;) +
   coord_flip()</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 <pre class="r"><code>fb_sentiment &lt;-    
  inner_join(fb_words, nrc, by = &quot;word&quot;) %&gt;% 
             group_by(sentiment)  
@@ -452,7 +452,7 @@ fb_sentiment_analysis %&gt;%
   xlab(&quot;Sentiment&quot;) +
   labs(title=&quot;Facebook Sentiment&quot;)</code></pre>
 <pre><code>## Selecting by n</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>tiktok_sentiment_analysis &lt;- tiktok_sentiment %&gt;% 
   count(word, sentiment) %&gt;% 
   group_by(sentiment)
@@ -465,7 +465,7 @@ tiktok_sentiment_analysis %&gt;%
   xlab(&quot;Sentiment&quot;) +
   labs(title=&quot;TikTok Sentiment&quot;)</code></pre>
 <pre><code>## Selecting by n</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 <pre class="r"><code>fb_sentiment_analysis %&gt;% filter(!sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
   mutate(sentiment = reorder(sentiment, -n),
          word = reorder(word, -n)) %&gt;% top_n(10) -&gt; fb_sentiment_analysis2</code></pre>
@@ -475,7 +475,7 @@ tiktok_sentiment_analysis %&gt;%
   geom_bar(stat =&quot;identity&quot;) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
   labs(y=&quot;count&quot;, title=&quot;Facebook Sentiment&quot;)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>tiktok_sentiment_analysis %&gt;% filter(!sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
   mutate(sentiment = reorder(sentiment, -n),
          word = reorder(word, -n)) %&gt;% top_n(10) -&gt; tiktok_sentiment_analysis2</code></pre>
@@ -485,15 +485,17 @@ tiktok_sentiment_analysis %&gt;%
   geom_bar(stat =&quot;identity&quot;) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
   labs(y=&quot;count&quot;, title=&quot;Tik Tok Sentiment&quot;)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-11-2.png" width="672" /> We also want to visualize common words on Facebook and Tiktok by wordccloud</p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-11-2.png" width="672" /> We also want to visualize common words on Facebook and Tiktok by wordccloud</p>
 <pre class="r"><code>facebook_cloud &lt;- fb_words  %&gt;% count(word) %&gt;% arrange(-n)
 wordcloud(facebook_cloud$word, facebook_cloud$n, max.words = 200, colors = c(&quot;#00B2FF&quot;, &quot;red&quot;, &quot;#FF0099&quot;, &quot;#6600CC&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;blue&quot;, &quot;brown&quot;))</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>tiktok_cloud &lt;- tiktok_words  %&gt;% count(word) %&gt;% arrange(-n)
 wordcloud(tiktok_cloud$word, tiktok_cloud$n, max.words = 200, colors = c(&quot;#00B2FF&quot;, &quot;red&quot;, &quot;#FF0099&quot;, &quot;#6600CC&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;blue&quot;, &quot;brown&quot;))</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <p>Next, we examine texts on Facebook and Tiktok to see their positive-negative score by using afinn lexicon</p>
 <pre class="r"><code># run this to get afinn lexicon and save it as a csv
+# get_sentiments (&quot;afinn&quot;) -&gt; afinn
+#
 #afinn %&gt;% write_as_csv(&quot;afinn.csv&quot;)
 afinn &lt;- read_csv(&#39;afinn.csv&#39;)</code></pre>
 <pre class="r"><code>fb_afinn &lt;-    
@@ -548,11 +550,15 @@ index &lt;-
                       p = 0.8, list = FALSE)
 for_decisiontree &lt;-
   both_users %&gt;% select(-1,-2,-3,-4)
-train &lt;- for_decisiontree[index, ]
-test  &lt;- for_decisiontree[-index, ]
+train &lt;- for_decisiontree[index, ]</code></pre>
+<pre><code>## Warning: The `i` argument of ``[`()` can&#39;t be a matrix as of tibble 3.0.0.
+## Convert to a vector.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre class="r"><code>test  &lt;- for_decisiontree[-index, ]
 simple_model &lt;- rpart(user ~ ., data = train, method = &quot;class&quot;)
 rpart.plot(simple_model, yesno = 2)</code></pre>
-<p><img src="HW09_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="Assignment_09_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre class="r"><code>set.seed(123)
 bagging_model &lt;- train(
   user ~ .,
