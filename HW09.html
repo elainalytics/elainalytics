@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ammar Plumber, Elaina Lin, Kim Nguyen, Meghan Aines, Ryan Karbowicz" />
+
+
+<title>Homework 9 - Alligators</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Elainalytics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="hw09.html">HW 09</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Homework 9 - Alligators</h1>
+<h4 class="author">Ammar Plumber, Elaina Lin, Kim Nguyen, Meghan Aines, Ryan Karbowicz</h4>
+<h4 class="date">4/13/2021</h4>
+
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>We will be examining the difference in Tweet communications between TikTok and Facebook. These are two popular social media platforms but with very different target audiences, thus the two brands could differ in their communication styles and language.</p>
+</div>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<p>Loading packages.</p>
+<pre class="r"><code>library(rtweet)
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(tidytext)
+library(wordcloud)
+library(textdata)
+library(caret)       # for general model fitting
+library(rpart)       # for fitting decision trees
+library(rpart.plot)
+library(ipred)       # for fitting bagged decision trees
+library(ranger)
+library(gbm)
+library(vip)</code></pre>
+<p>Getting tweets</p>
+<pre class="r"><code># Run these two lines to get the tweets 
+# and then save them as a csv for future use
+# tiktok &lt;- get_timeline(&quot;tiktok_us&quot;, n=3200)
+# tiktok %&gt;% write_as_csv(&#39;tiktok.csv&#39;)
+# 
+# facebook &lt;- get_timeline(&quot;Facebook&quot;, n=3200)
+# facebook %&gt;% write_as_csv(&quot;facebook.csv&quot;)
+tiktok &lt;-
+  read_csv(&#39;tiktok.csv&#39;) %&gt;% 
+  select(status_id, source, text, created_at)
+facebook &lt;-
+  read_csv(&#39;facebook.csv&#39;) %&gt;% 
+  select(status_id, source, text, created_at)
+nrc &lt;- read_rds(&quot;nrc.rds&quot;)
+facebook %&gt;% head()</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   status_id      source    text                              created_at         
+##   &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;                             &lt;dttm&gt;             
+## 1 x138202008034~ Twitter ~ &quot;Ramadan Mubarak &lt;U+0001F319&gt;\r\~ 2021-04-13 17:17:18
+## 2 x138173442901~ Khoros CX &quot;@MeenalK1 Hi Meenal. Do you hav~ 2021-04-12 22:22:13
+## 3 x138173338263~ Khoros CX &quot;@Afrojalipro Thanks for updatin~ 2021-04-12 22:18:04
+## 4 x138173266838~ Khoros CX &quot;@CallandManning Hi Calland. If ~ 2021-04-12 22:15:14
+## 5 x138171137687~ Khoros CX &quot;@BHARTINANDAN4 Hello! Please vi~ 2021-04-12 20:50:37
+## 6 x138171054847~ Khoros CX &quot;@weathermatt22 Hi Matt. Please ~ 2021-04-12 20:47:20</code></pre>
+<pre class="r"><code>facebook %&gt;%
+  count(source, hour = hour(with_tz(created_at, &quot;EST&quot;))) %&gt;%
+  mutate(percent = n/sum(n)) %&gt;%
+  ggplot(aes(x = hour, y = percent, color = source)) +
+  labs(x = &quot;Hour of day (EST)&quot;, y = &quot;% of tweets&quot;, color = &quot;&quot;) + 
+  scale_y_continuous(labels = percent_format()) +
+  geom_line() +
+  ggtitle(&#39;Facebook Source Breakdown by Hour&#39;)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>tiktok %&gt;%
+  count(source, hour = hour(with_tz(created_at, &quot;EST&quot;))) %&gt;%
+  mutate(percent = n/sum(n)) %&gt;%
+  ggplot(aes(x = hour, y = percent, color = source)) +
+  labs(x = &quot;Hour of day (EST)&quot;, y = &quot;% of tweets&quot;, color = &quot;&quot;) + 
+  scale_y_continuous(labels = percent_format()) +
+  geom_line() +
+  ggtitle(&#39;Tiktok Source Breakdown by Hour&#39;)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>fb_wordcounts &lt;- 
+  facebook %&gt;%
+  mutate(tweetLength = str_length(text)) %&gt;% 
+  filter(tweetLength &lt; 500)
+tiktok_wordcounts &lt;- 
+  tiktok %&gt;%
+  mutate(tweetLength = str_length(text)) %&gt;% 
+  filter(tweetLength &lt; 500)
+writeLines(c(paste0(&quot;Facebook Mean Tweet Length: &quot;, 
+                  mean(fb_wordcounts$tweetLength)), 
+           paste0(&quot;TikTok Mean Tweet Length: &quot;, 
+                  mean(tiktok_wordcounts$tweetLength))))</code></pre>
+<pre><code>## Facebook Mean Tweet Length: 163.370231394622
+## TikTok Mean Tweet Length: 112.916405760801</code></pre>
+<pre class="r"><code>hist(tiktok_wordcounts$tweetLength)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>hist(fb_wordcounts$tweetLength)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<pre class="r"><code>fb_picture_counts &lt;- 
+  facebook %&gt;%
+  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
+  count(picture = ifelse(str_detect(text, &quot;t.co&quot;),
+                         &quot;Picture/link&quot;, &quot;No picture/link&quot;))
+tiktok_picture_counts &lt;- 
+  tiktok %&gt;%
+  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
+  count(picture = ifelse(str_detect(text, &quot;t.co&quot;),
+                         &quot;Picture/link&quot;, &quot;No picture/link&quot;))
+barplot(fb_picture_counts$n, 
+        names.arg=c(&quot;No picture/link&quot;, &quot;Picture/link&quot;),
+        main = &quot;Facebook # of Tweets with and without pics/link&quot;)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>barplot(tiktok_picture_counts$n, 
+        names.arg=c(&quot;No picture/link&quot;, &quot;Picture/link&quot;),
+        main = &quot;Tiktok # of Tweets with and without pics/link&quot;)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre class="r"><code>reg &lt;- &quot;([^A-Za-z\\d#@&#39;]|&#39;(?![A-Za-z\\d#@]))&quot;
+# Unnest the text strings into a data frame of words
+fb_words &lt;- 
+  facebook %&gt;%
+  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
+  mutate(text = str_replace_all(text, 
+                                &quot;https://t.co/[A-Za-z\\d]+|&amp;amp;&quot;, 
+                                &quot;&quot;)) %&gt;%
+  unnest_tokens(word, text, 
+                token = &quot;regex&quot;, 
+                pattern = reg) %&gt;%
+  filter(!word %in% stop_words$word,
+         str_detect(word, &quot;[a-z]&quot;))
+tiktok_words &lt;- 
+  tiktok %&gt;%
+  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
+  mutate(text = str_replace_all(text, 
+                                &quot;https://t.co/[A-Za-z\\d]+|&amp;amp;&quot;, 
+                                &quot;&quot;)) %&gt;%
+  unnest_tokens(word, text, 
+                token = &quot;regex&quot;, 
+                pattern = reg) %&gt;%
+  filter(!word %in% stop_words$word,
+         str_detect(word, &quot;[a-z]&quot;))
+# Inspect the first six rows of tweet_words
+head(fb_words)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   status_id            source          created_at          word        
+##   &lt;chr&gt;                &lt;chr&gt;           &lt;dttm&gt;              &lt;chr&gt;       
+## 1 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 ramadan     
+## 2 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 mubarak     
+## 3 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 0001f319    
+## 4 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 #monthofgood
+## 5 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 check       
+## 6 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 kindness</code></pre>
+<pre class="r"><code>fb_words %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  head(20) %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(x = word, y = n)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  ylab(&quot;Occurrences&quot;) +
+  coord_flip()</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>tiktok_words %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  head(20) %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(x = word, y = n)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  ylab(&quot;Occurrences&quot;) +
+  coord_flip()</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<pre class="r"><code>fb_sentiment &lt;-    
+ inner_join(fb_words, nrc, by = &quot;word&quot;) %&gt;% 
+            group_by(sentiment)  
+tiktok_sentiment &lt;-    
+ inner_join(tiktok_words, nrc, by = &quot;word&quot;) %&gt;% 
+            group_by(sentiment) 
+fb_words %&gt;% head()</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   status_id            source          created_at          word        
+##   &lt;chr&gt;                &lt;chr&gt;           &lt;dttm&gt;              &lt;chr&gt;       
+## 1 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 ramadan     
+## 2 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 mubarak     
+## 3 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 0001f319    
+## 4 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 #monthofgood
+## 5 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 check       
+## 6 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 kindness</code></pre>
+<p>Here we compare the sentiment between Facebook and TikTok. It looks like discussions surrounding Facebook uses more trust words while topics about TikTok uses more words that reflect anticipation.</p>
+<pre class="r"><code>fb_sentiment_analysis &lt;- fb_sentiment %&gt;% 
+  count(word, sentiment) %&gt;% 
+  group_by(sentiment)
+fb_sentiment_analysis %&gt;%  
+  top_n(15) %&gt;% 
+  ggplot(aes(x = sentiment, y = n )) +
+  geom_bar(stat = &quot;identity&quot;) +
+  coord_flip() +
+  ylab(&quot;Frequency&quot;) +
+  xlab(&quot;Sentiment&quot;) +
+  labs(title=&quot;Facebook Sentiment&quot;)</code></pre>
+<pre><code>## Selecting by n</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>tiktok_sentiment_analysis &lt;- tiktok_sentiment %&gt;% 
+  count(word, sentiment) %&gt;% 
+  group_by(sentiment)
+tiktok_sentiment_analysis %&gt;%  
+  top_n(15) %&gt;% 
+  ggplot(aes(x = sentiment, y = n )) +
+  geom_bar(stat = &quot;identity&quot;) +
+  coord_flip() +
+  ylab(&quot;Frequency&quot;) +
+  xlab(&quot;Sentiment&quot;) +
+  labs(title=&quot;TikTok Sentiment&quot;)</code></pre>
+<pre><code>## Selecting by n</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<pre class="r"><code>fb_sentiment_analysis %&gt;% filter(!sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
+  mutate(sentiment = reorder(sentiment, -n),
+         word = reorder(word, -n)) %&gt;% top_n(10) -&gt; fb_sentiment_analysis2</code></pre>
+<pre><code>## Selecting by n</code></pre>
+<pre class="r"><code>ggplot(fb_sentiment_analysis2, aes(x=word, y=n, fill = n)) +
+  facet_wrap(~ sentiment, scales = &quot;free&quot;)+ 
+  geom_bar(stat =&quot;identity&quot;) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  labs(y=&quot;count&quot;, title=&quot;Facebook Sentiment&quot;)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>tiktok_sentiment_analysis %&gt;% filter(!sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
+  mutate(sentiment = reorder(sentiment, -n),
+         word = reorder(word, -n)) %&gt;% top_n(10) -&gt; tiktok_sentiment_analysis2</code></pre>
+<pre><code>## Selecting by n</code></pre>
+<pre class="r"><code>ggplot(tiktok_sentiment_analysis2, aes(x=word, y=n, fill = n)) +
+  facet_wrap(~ sentiment, scales = &quot;free&quot;)+ 
+  geom_bar(stat =&quot;identity&quot;) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  labs(y=&quot;count&quot;, title=&quot;Tik Tok Sentiment&quot;)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-11-2.png" width="672" /> We also want to visualize common words on Facebook and Tiktok by wordccloud</p>
+<pre class="r"><code>facebook_cloud &lt;- fb_words  %&gt;% count(word) %&gt;% arrange(-n)
+wordcloud(facebook_cloud$word, facebook_cloud$n, max.words = 200, colors = c(&quot;#00B2FF&quot;, &quot;red&quot;, &quot;#FF0099&quot;, &quot;#6600CC&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;blue&quot;, &quot;brown&quot;))</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>tiktok_cloud &lt;- tiktok_words  %&gt;% count(word) %&gt;% arrange(-n)
+wordcloud(tiktok_cloud$word, tiktok_cloud$n, max.words = 200, colors = c(&quot;#00B2FF&quot;, &quot;red&quot;, &quot;#FF0099&quot;, &quot;#6600CC&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;blue&quot;, &quot;brown&quot;))</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p>Next, we examine texts on Facebook and Tiktok to see their positive-negative score by using afinn lexicon</p>
+<pre class="r"><code># run this to get afinn lexicon and save it as a csv
+#afinn %&gt;% write_as_csv(&quot;afinn.csv&quot;)
+afinn &lt;- read_csv(&#39;afinn.csv&#39;)</code></pre>
+<pre class="r"><code>fb_afinn &lt;-    
+ inner_join(fb_words, afinn, by = &quot;word&quot;) 
+tiktok_afinn &lt;-    
+ inner_join(tiktok_words, afinn, by = &quot;word&quot;)
+fb_afinn %&gt;% summarise(mean_fb_afinn = mean(value))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   mean_fb_afinn
+##           &lt;dbl&gt;
+## 1         0.785</code></pre>
+<pre class="r"><code>tiktok_afinn %&gt;% summarise(mean_tt_afinn = mean(value))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   mean_tt_afinn
+##           &lt;dbl&gt;
+## 1          1.70</code></pre>
+<p>Mean of Facebook’s afinn value is 0.79 while mean of Tiktok’s afinn value is 1.704293. In general, tweets from Tiktok are more positive than those on Facebook.</p>
+<p>Here, we predict the user based on the tweet length and number of words for each sentiment. TikTok is encoded as 1, and Facebook is encoded as 0.</p>
+<pre class="r"><code>fb_sentiment_counts &lt;- 
+  fb_sentiment %&gt;% 
+  group_by(status_id) %&gt;% 
+  count(sentiment) %&gt;% 
+  pivot_wider(id_cols = status_id, 
+              names_from = sentiment, 
+              values_from = n,
+              values_fill = 0)
+tiktok_sentiment_counts &lt;- 
+  tiktok_sentiment %&gt;% 
+  group_by(status_id) %&gt;% 
+  count(sentiment) %&gt;% 
+  pivot_wider(id_cols = status_id, 
+              names_from = sentiment, 
+              values_from = n,
+              values_fill = 0)
+tiktok_feature_selection &lt;- 
+  tiktok_wordcounts %&gt;% 
+  mutate(user = 1) %&gt;% 
+  left_join(tiktok_sentiment_counts, 
+            by=&quot;status_id&quot;)
+facebook_feature_selection &lt;-
+  fb_wordcounts %&gt;% 
+  mutate(user = 0) %&gt;% 
+  left_join(fb_sentiment_counts, 
+            by=&quot;status_id&quot;)
+both_users &lt;- 
+  tiktok_feature_selection %&gt;% 
+  rbind(facebook_feature_selection) %&gt;%
+  mutate_if(is.numeric,coalesce,0)
+set.seed(123)
+index &lt;- 
+  createDataPartition(both_users$user,
+                      p = 0.8, list = FALSE)
+for_decisiontree &lt;-
+  both_users %&gt;% select(-1,-2,-3,-4)
+train &lt;- for_decisiontree[index, ]</code></pre>
+<pre><code>## Warning: The `i` argument of ``[`()` can&#39;t be a matrix as of tibble 3.0.0.
+## Convert to a vector.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre class="r"><code>test  &lt;- for_decisiontree[-index, ]
+simple_model &lt;- rpart(user ~ ., data = train, method = &quot;class&quot;)
+rpart.plot(simple_model, yesno = 2)</code></pre>
+<p><img src="HW09_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(123)
+bagging_model &lt;- train(
+  user ~ .,
+  data = train,
+  method = &quot;treebag&quot;,
+  trControl = trainControl(method = &quot;oob&quot;),
+  keepX = T,
+  nbagg = 100,
+  importance = &quot;impurity&quot;,
+  control = rpart.control(minsplit = 2, cp = 0)
+)
+n_features &lt;- length(setdiff(names(train), &quot;user&quot;))
+rf_model &lt;- ranger(
+  user ~ .,
+  data = train,
+  mtry = floor(n_features * 0.5),
+  respect.unordered.factors = &quot;order&quot;,
+  importance = &quot;permutation&quot;,
+  seed = 123
+)
+set.seed(123)  # for reproducibility
+gbm_model &lt;- gbm(
+  formula = user ~ .,
+  data = train,
+  distribution = &quot;gaussian&quot;,  # SSE loss function
+  n.trees = 1000,
+  shrinkage = 0.05,
+  interaction.depth = 5,
+  n.minobsinnode = 4,
+  cv.folds = 10
+)</code></pre>
+<pre class="r"><code>actual_train &lt;- train$user
+simple_pred_train &lt;- 
+  predict(simple_model, newdata = train) %&gt;% 
+  as_tibble() %&gt;% 
+  select(2) %&gt;% 
+  unlist() %&gt;% 
+  as.vector()
+rss_simple_train &lt;- sum((actual_train-simple_pred_train)^2)
+bagging_pred_train &lt;- 
+  predict(bagging_model, newdata = train) %&gt;% 
+  as.vector()
+rss_bagging_train &lt;- sum((actual_train-bagging_pred_train)^2)
+rf_pred_train &lt;- predict(rf_model, data = train, seed = 123, verbose = T)[1] %&gt;% unlist()
+rss_rf_train &lt;- sum((actual_train-rf_pred_train)^2)
+gb_pred_train &lt;- predict(gbm_model, newdata = train)</code></pre>
+<pre><code>## Using 772 trees...</code></pre>
+<pre class="r"><code>rss_gb_train &lt;- sum((actual_train-gb_pred_train)^2)
+cat(paste0(&quot;Residual Sum of Squares on Training Set\n&quot;,
+           &quot;\nSimple model: &quot;, rss_simple_train, 
+           &quot;\nBagged model: &quot;, rss_bagging_train, 
+           &quot;\nRandom forests model: &quot;, rss_rf_train, 
+           &quot;\nGradient boost model: &quot;, rss_gb_train))</code></pre>
+<pre><code>## Residual Sum of Squares on Training Set
+## 
+## Simple model: 728.115574866781
+## Bagged model: 234.134334171041
+## Random forests model: 341.836252608464
+## Gradient boost model: 487.591316311503</code></pre>
+<pre class="r"><code>actual_test &lt;- test$user
+simple_pred_test &lt;- 
+  predict(simple_model, newdata = test) %&gt;% 
+  as_tibble() %&gt;% 
+  select(2) %&gt;% 
+  unlist() %&gt;% 
+  as.vector()
+rss_simple_test &lt;- sum((actual_test-simple_pred_test)^2)
+bagging_pred_test &lt;- 
+  predict(bagging_model, newdata = test) %&gt;% 
+  as.vector()
+rss_bagging_test &lt;- sum((actual_test-bagging_pred_test)^2)
+rf_pred_test &lt;- predict(rf_model, data = test, seed = 123, verbose = T)[1] %&gt;% unlist() %&gt;% as.vector()
+rss_rf_test &lt;- sum((actual_test-rf_pred_test)^2)
+gb_pred_test &lt;- predict(gbm_model, newdata = test)</code></pre>
+<pre><code>## Using 772 trees...</code></pre>
+<pre class="r"><code>rss_gb_test &lt;- sum((actual_test-gb_pred_test)^2)
+cat(paste0(&quot;Residual Sum of Squares on Test Set\n&quot;,
+           &quot;\nSimple model: &quot;, rss_simple_test, 
+           &quot;\nBagged model: &quot;, rss_bagging_test, 
+           &quot;\nRandom forests model: &quot;, rss_rf_test, 
+           &quot;\nGradient boost model: &quot;, rss_gb_test))</code></pre>
+<pre><code>## Residual Sum of Squares on Test Set
+## 
+## Simple model: 175.624598361742
+## Bagged model: 173.583365870805
+## Random forests model: 147.28870139516
+## Gradient boost model: 150.917635106566</code></pre>
+<p>The random forests model performed the best on the test set even though it was only second best for the training set. However, that may be an indication that the bagging model was overfit, which caused it to perform much worse on the test set than the random forests model.</p>
+</div>
+<div id="evaluating-performance-confusion-matrices" class="section level2">
+<h2>Evaluating Performance: Confusion Matrices</h2>
+<p>Now, I produce confusion matrices for all tree-based methods—first evaluating their performance on the test set. Note again that a Tiktok tweet is encoded as 1, and a Facebook tweet is encoded as 0. The code is shown for the first matrix but not for subsequent ones for the sake of elegance.</p>
+<p><strong>Simple Model - Test Set:</strong></p>
+<pre class="r"><code>simple_test_confusion &lt;- 
+  confusionMatrix(data = factor(round(simple_pred_test)),
+                  reference = factor(actual_test), mode = &quot;prec_recall&quot;)
+simple_test_errors &lt;- 
+  simple_test_confusion$table[2] +
+  simple_test_confusion$table[3]
+simple_test_accuracy &lt;-
+  as.numeric(simple_test_confusion$overall[1])
+simple_test_confusion</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   0   1
+##          0 550 137
+##          1 101 490
+##                                           
+##                Accuracy : 0.8138          
+##                  95% CI : (0.7913, 0.8348)
+##     No Information Rate : 0.5094          
+##     P-Value [Acc &gt; NIR] : &lt; 2e-16         
+##                                           
+##                   Kappa : 0.627           
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.02329         
+##                                           
+##               Precision : 0.8006          
+##                  Recall : 0.8449          
+##                      F1 : 0.8221          
+##              Prevalence : 0.5094          
+##          Detection Rate : 0.4304          
+##    Detection Prevalence : 0.5376          
+##       Balanced Accuracy : 0.8132          
+##                                           
+##        &#39;Positive&#39; Class : 0               
+## </code></pre>
+<p><strong>Bagging Model - Test Set:</strong></p>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   0   1
+##          0 521 112
+##          1 130 515
+##                                           
+##                Accuracy : 0.8106          
+##                  95% CI : (0.7881, 0.8318)
+##     No Information Rate : 0.5094          
+##     P-Value [Acc &gt; NIR] : &lt;2e-16          
+##                                           
+##                   Kappa : 0.6214          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.2745          
+##                                           
+##               Precision : 0.8231          
+##                  Recall : 0.8003          
+##                      F1 : 0.8115          
+##              Prevalence : 0.5094          
+##          Detection Rate : 0.4077          
+##    Detection Prevalence : 0.4953          
+##       Balanced Accuracy : 0.8108          
+##                                           
+##        &#39;Positive&#39; Class : 0               
+## </code></pre>
+<p><strong>Random Forests - Test Set:</strong></p>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   0   1
+##          0 559 118
+##          1  92 509
+##                                           
+##                Accuracy : 0.8357          
+##                  95% CI : (0.8142, 0.8556)
+##     No Information Rate : 0.5094          
+##     P-Value [Acc &gt; NIR] : &lt;2e-16          
+##                                           
+##                   Kappa : 0.671           
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.0845          
+##                                           
+##               Precision : 0.8257          
+##                  Recall : 0.8587          
+##                      F1 : 0.8419          
+##              Prevalence : 0.5094          
+##          Detection Rate : 0.4374          
+##    Detection Prevalence : 0.5297          
+##       Balanced Accuracy : 0.8352          
+##                                           
+##        &#39;Positive&#39; Class : 0               
+## </code></pre>
+<p><strong>Gradient Boosting Model - Test Set:</strong></p>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   0   1
+##          0 564 114
+##          1  87 513
+##                                           
+##                Accuracy : 0.8427          
+##                  95% CI : (0.8216, 0.8623)
+##     No Information Rate : 0.5094          
+##     P-Value [Acc &gt; NIR] : &lt; 2e-16         
+##                                           
+##                   Kappa : 0.6851          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.06667         
+##                                           
+##               Precision : 0.8319          
+##                  Recall : 0.8664          
+##                      F1 : 0.8488          
+##              Prevalence : 0.5094          
+##          Detection Rate : 0.4413          
+##    Detection Prevalence : 0.5305          
+##       Balanced Accuracy : 0.8423          
+##                                           
+##        &#39;Positive&#39; Class : 0               
+## </code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
