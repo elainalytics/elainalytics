@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## I. Introduction
 
-Social media has evolved and affected our lives in many aspects. In this assignment, we aim to have a closer look at the two most popular social media platforms: Tiktok and Facebook. These platforms are in a similar industry but with very different target audiences, thus the two brands and their audiences could differ in their communication styles and language. Understanding the language used in these platforms may lead to their business implications and directions. 
+Social media has evolved and affected our lives in many aspects. In this assignment, we aim to have a closer look at two of the most popular social media platforms: Tiktok and Facebook. These platforms are in a similar industry but with very different target audiences, thus the two brands and their audiences could differ in their communication styles and language. Understanding the language used in these platforms may lead to their business implications and directions. 
 
-Our research question focuses on whether there are differences in sentiments of tweet communications that mention Tiktok and Facebook accounts. 
+Our research question examines whether there are differences in sentiments of tweet communications that mention Tiktok and Facebook accounts. 
 
 ## II. Methodology
 
@@ -706,9 +706,13 @@ In sum, it seems that the best model is the random forests model, with a test se
 When analyzing the sum of squares difference between the actual tweeter and the predicted tweeter, the results were as follows:  
 
 Simple model: 744.823130490417
+
 Bagging model: 148.955784690615
+
 Random forests model: 226.599946610086
+
 Gradient boosting model: 407.58762929458
+
 
 ## IV. Conclusion
 
