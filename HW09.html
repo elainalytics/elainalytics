@@ -31,8 +31,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -45,17 +43,101 @@
   ul.task-list{list-style: none;}
     </style>
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -282,142 +364,142 @@ $(document).ready(function () {
 <p>Finally, we run 4 different models to predict if a tweet was posted by either Facebook or Tiktok. The inputs of these models are the length of the tweet, as well as sentiment (which includes anger, anticipation, disgust, negative, postive, trust, joy, surprise, fear and sadness).</p>
 <p>The first model is a Simple Decision Tree, the second model is a Bagging Model, the third model is a Random Forest and the fourth model is a Gradient Boosting Model.</p>
 <p>Our results include a sum of squares analysis on the test set of data to determine which models have the smallest differences between the predicted tweeter and actual tweeter. We also include confusion matrices on the test set of data to analyze the prediction accuracy of the 4 models.</p>
-<pre class="r"><code>#Loading packages.
-library(rtweet)
-library(tidyverse)
-library(lubridate)
-library(scales)
-library(tidytext)
-library(wordcloud)
-library(textdata)
-
-library(caret)       # for general model fitting
-library(rpart)       # for fitting decision trees
-library(rpart.plot)
-library(ipred)       # for fitting bagged decision trees
-library(ranger)
-library(gbm)
-library(vip)
-library(kableExtra)</code></pre>
-<pre class="r"><code>#Getting tweets
-
-# Run these two lines to get the tweets 
-# and then save them as a csv for future use
-# tiktok &lt;- get_timeline(&quot;tiktok_us&quot;, n=3200)
-# tiktok %&gt;% write_as_csv(&#39;tiktok.csv&#39;)
-# 
-# facebook &lt;- get_timeline(&quot;Facebook&quot;, n=3200)
-# facebook %&gt;% write_as_csv(&quot;facebook.csv&quot;)
-
-tiktok &lt;-
-  read_csv(&#39;tiktok.csv&#39;) %&gt;% 
-  select(status_id, source, text, created_at)
-
-facebook &lt;-
-  read_csv(&#39;facebook.csv&#39;) %&gt;% 
-  select(status_id, source, text, created_at)
-
-nrc &lt;- read_rds(&quot;nrc.rds&quot;)
-
-facebook %&gt;% head()</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Loading packages.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textdata)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)       <span class="co"># for general model fitting</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)       <span class="co"># for fitting decision trees</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipred)       <span class="co"># for fitting bagged decision trees</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ranger)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vip)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting tweets</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Run these two lines to get the tweets </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and then save them as a csv for future use</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tiktok &lt;- get_timeline(&quot;tiktok_us&quot;, n=3200)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tiktok %&gt;% write_as_csv(&#39;tiktok.csv&#39;)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># facebook &lt;- get_timeline(&quot;Facebook&quot;, n=3200)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># facebook %&gt;% write_as_csv(&quot;facebook.csv&quot;)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>tiktok <span class="ot">&lt;-</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">&#39;tiktok.csv&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(status_id, source, text, created_at)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>facebook <span class="ot">&lt;-</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">&#39;facebook.csv&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(status_id, source, text, created_at)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;nrc.rds&quot;</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>facebook <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
-##   status_id      source    text                              created_at         
-##   &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;                             &lt;dttm&gt;             
-## 1 x138202008034~ Twitter ~ &quot;Ramadan Mubarak &lt;U+0001F319&gt;\r\~ 2021-04-13 17:17:18
-## 2 x138173442901~ Khoros CX &quot;@MeenalK1 Hi Meenal. Do you hav~ 2021-04-12 22:22:13
-## 3 x138173338263~ Khoros CX &quot;@Afrojalipro Thanks for updatin~ 2021-04-12 22:18:04
-## 4 x138173266838~ Khoros CX &quot;@CallandManning Hi Calland. If ~ 2021-04-12 22:15:14
-## 5 x138171137687~ Khoros CX &quot;@BHARTINANDAN4 Hello! Please vi~ 2021-04-12 20:50:37
-## 6 x138171054847~ Khoros CX &quot;@weathermatt22 Hi Matt. Please ~ 2021-04-12 20:47:20</code></pre>
-<pre class="r"><code>facebook %&gt;%
-  count(source, hour = hour(with_tz(created_at, &quot;EST&quot;))) %&gt;%
-  mutate(percent = n/sum(n)) %&gt;%
-  ggplot(aes(x = hour, y = percent, color = source)) +
-  labs(x = &quot;Hour of day (EST)&quot;, y = &quot;% of tweets&quot;, color = &quot;&quot;) + 
-  scale_y_continuous(labels = percent_format()) +
-  geom_line() +
-  ggtitle(&#39;Facebook Source Breakdown by Hour&#39;)</code></pre>
+##   status_id       source     text                                            created_at         
+##   &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;                                           &lt;dttm&gt;             
+## 1 x1382020080343~ Twitter W~ &quot;Ramadan Mubarak &lt;U+0001F319&gt;\r\n \r\nThis #Mo~ 2021-04-13 17:17:18
+## 2 x1381734429018~ Khoros CX  &quot;@MeenalK1 Hi Meenal. Do you have the referenc~ 2021-04-12 22:22:13
+## 3 x1381733382632~ Khoros CX  &quot;@Afrojalipro Thanks for updating us, Afroj! W~ 2021-04-12 22:18:04
+## 4 x1381732668388~ Khoros CX  &quot;@CallandManning Hi Calland. If you do not hav~ 2021-04-12 22:15:14
+## 5 x1381711376876~ Khoros CX  &quot;@BHARTINANDAN4 Hello! Please visit this Help ~ 2021-04-12 20:50:37
+## 6 x1381710548476~ Khoros CX  &quot;@weathermatt22 Hi Matt. Please visit our Help~ 2021-04-12 20:47:20</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>facebook <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(source, <span class="at">hour =</span> <span class="fu">hour</span>(<span class="fu">with_tz</span>(created_at, <span class="st">&quot;EST&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> percent, <span class="at">color =</span> source)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hour of day (EST)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;% of tweets&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;Facebook Source Breakdown by Hour&#39;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>tiktok %&gt;%
-  count(source, hour = hour(with_tz(created_at, &quot;EST&quot;))) %&gt;%
-  mutate(percent = n/sum(n)) %&gt;%
-  ggplot(aes(x = hour, y = percent, color = source)) +
-  labs(x = &quot;Hour of day (EST)&quot;, y = &quot;% of tweets&quot;, color = &quot;&quot;) + 
-  scale_y_continuous(labels = percent_format()) +
-  geom_line() +
-  ggtitle(&#39;Tiktok Source Breakdown by Hour&#39;)</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tiktok <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(source, <span class="at">hour =</span> <span class="fu">hour</span>(<span class="fu">with_tz</span>(created_at, <span class="st">&quot;EST&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> percent, <span class="at">color =</span> source)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hour of day (EST)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;% of tweets&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;Tiktok Source Breakdown by Hour&#39;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-4-2.png" width="672" /> These above figures indicate Tiktok/Facebook breakdown by hour. Across sources, the “busiest” time on both platforms are from 12:00 to 20:00. While Khoros Publishing has the most tweets about Facebook with its peak around 16:00, Twitter Web App and Fan Experiences (peaks around 16:00) are the main source of tweets about Tiktok.</p>
-<pre class="r"><code>fb_wordcounts &lt;- 
-  facebook %&gt;%
-  mutate(tweetLength = str_length(text)) %&gt;% 
-  filter(tweetLength &lt; 500)
-
-tiktok_wordcounts &lt;- 
-  tiktok %&gt;%
-  mutate(tweetLength = str_length(text)) %&gt;% 
-  filter(tweetLength &lt; 500)
-
-writeLines(c(paste0(&quot;Facebook Mean Tweet Length: &quot;, 
-                  mean(fb_wordcounts$tweetLength)), 
-           paste0(&quot;TikTok Mean Tweet Length: &quot;, 
-                  mean(tiktok_wordcounts$tweetLength))))</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fb_wordcounts <span class="ot">&lt;-</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  facebook <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tweetLength =</span> <span class="fu">str_length</span>(text)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweetLength <span class="sc">&lt;</span> <span class="dv">500</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>tiktok_wordcounts <span class="ot">&lt;-</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  tiktok <span class="sc">%&gt;%</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tweetLength =</span> <span class="fu">str_length</span>(text)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweetLength <span class="sc">&lt;</span> <span class="dv">500</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;Facebook Mean Tweet Length: &quot;</span>, </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mean</span>(fb_wordcounts<span class="sc">$</span>tweetLength)), </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>           <span class="fu">paste0</span>(<span class="st">&quot;TikTok Mean Tweet Length: &quot;</span>, </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mean</span>(tiktok_wordcounts<span class="sc">$</span>tweetLength))))</span></code></pre></div>
 <pre><code>## Facebook Mean Tweet Length: 163.370231394622
 ## TikTok Mean Tweet Length: 112.916405760801</code></pre>
-<pre class="r"><code>hist(tiktok_wordcounts$tweetLength)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(tiktok_wordcounts<span class="sc">$</span>tweetLength)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>hist(fb_wordcounts$tweetLength)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fb_wordcounts<span class="sc">$</span>tweetLength)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>In terms of tweet length, a typical tweet related to Tiktok has from 50 to 100 words. There are less tweets that has more than 100 words. A typical tweet related to Facebook has around 150 words.</p>
-<pre class="r"><code>fb_picture_counts &lt;- 
-  facebook %&gt;%
-  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
-  count(picture = ifelse(str_detect(text, &quot;t.co&quot;),
-                         &quot;Picture/link&quot;, &quot;No picture/link&quot;))
-
-tiktok_picture_counts &lt;- 
-  tiktok %&gt;%
-  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
-  count(picture = ifelse(str_detect(text, &quot;t.co&quot;),
-                         &quot;Picture/link&quot;, &quot;No picture/link&quot;))
-
-barplot(fb_picture_counts$n, 
-        names.arg=c(&quot;No picture/link&quot;, &quot;Picture/link&quot;),
-        main = &quot;Facebook # of Tweets with and without pics/link&quot;)</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fb_picture_counts <span class="ot">&lt;-</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  facebook <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">picture =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(text, <span class="st">&quot;t.co&quot;</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;Picture/link&quot;</span>, <span class="st">&quot;No picture/link&quot;</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>tiktok_picture_counts <span class="ot">&lt;-</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  tiktok <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">picture =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(text, <span class="st">&quot;t.co&quot;</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;Picture/link&quot;</span>, <span class="st">&quot;No picture/link&quot;</span>))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(fb_picture_counts<span class="sc">$</span>n, </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg=</span><span class="fu">c</span>(<span class="st">&quot;No picture/link&quot;</span>, <span class="st">&quot;Picture/link&quot;</span>),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Facebook # of Tweets with and without pics/link&quot;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code>barplot(tiktok_picture_counts$n, 
-        names.arg=c(&quot;No picture/link&quot;, &quot;Picture/link&quot;),
-        main = &quot;Tiktok # of Tweets with and without pics/link&quot;)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tiktok_picture_counts<span class="sc">$</span>n, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg=</span><span class="fu">c</span>(<span class="st">&quot;No picture/link&quot;</span>, <span class="st">&quot;Picture/link&quot;</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Tiktok # of Tweets with and without pics/link&quot;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <p>Facebook tweets that contains pictures or links are more common than ones that have no pictures or links. There are no remarakble differences between tweets that contain picture/link and ones that don’t contains picture/link from Tiktok.</p>
-<pre class="r"><code>reg &lt;- &quot;([^A-Za-z\\d#@&#39;]|&#39;(?![A-Za-z\\d#@]))&quot;
-
-# Unnest the text strings into a data frame of words
-fb_words &lt;- 
-  facebook %&gt;%
-  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
-  mutate(text = str_replace_all(text, 
-                                &quot;https://t.co/[A-Za-z\\d]+|&amp;amp;&quot;, 
-                                &quot;&quot;)) %&gt;%
-  unnest_tokens(word, text, 
-                token = &quot;regex&quot;, 
-                pattern = reg) %&gt;%
-  filter(!word %in% stop_words$word,
-         str_detect(word, &quot;[a-z]&quot;))
-
-tiktok_words &lt;- 
-  tiktok %&gt;%
-  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
-  mutate(text = str_replace_all(text, 
-                                &quot;https://t.co/[A-Za-z\\d]+|&amp;amp;&quot;, 
-                                &quot;&quot;)) %&gt;%
-  unnest_tokens(word, text, 
-                token = &quot;regex&quot;, 
-                pattern = reg) %&gt;%
-  filter(!word %in% stop_words$word,
-         str_detect(word, &quot;[a-z]&quot;))
-
-# Inspect the first six rows of tweet_words
-head(fb_words)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="st">&quot;([^A-Za-z</span><span class="sc">\\</span><span class="st">d#@&#39;]|&#39;(?![A-Za-z</span><span class="sc">\\</span><span class="st">d#@]))&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Unnest the text strings into a data frame of words</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fb_words <span class="ot">&lt;-</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  facebook <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_replace_all</span>(text, </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;https://t.co/[A-Za-z</span><span class="sc">\\</span><span class="st">d]+|&amp;amp;&quot;</span>, </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text, </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">token =</span> <span class="st">&quot;regex&quot;</span>, </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">pattern =</span> reg) <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>         <span class="fu">str_detect</span>(word, <span class="st">&quot;[a-z]&quot;</span>))</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>tiktok_words <span class="ot">&lt;-</span> </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  tiktok <span class="sc">%&gt;%</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_replace_all</span>(text, </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;https://t.co/[A-Za-z</span><span class="sc">\\</span><span class="st">d]+|&amp;amp;&quot;</span>, </span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text, </span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">token =</span> <span class="st">&quot;regex&quot;</span>, </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">pattern =</span> reg) <span class="sc">%&gt;%</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>         <span class="fu">str_detect</span>(word, <span class="st">&quot;[a-z]&quot;</span>))</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the first six rows of tweet_words</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fb_words)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   status_id            source          created_at          word        
 ##   &lt;chr&gt;                &lt;chr&gt;           &lt;dttm&gt;              &lt;chr&gt;       
@@ -427,33 +509,33 @@ head(fb_words)</code></pre>
 ## 4 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 #monthofgood
 ## 5 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 check       
 ## 6 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 kindness</code></pre>
-<pre class="r"><code>fb_words %&gt;%
-  count(word, sort = TRUE) %&gt;%
-  head(20) %&gt;%
-  mutate(word = reorder(word, n)) %&gt;%
-  ggplot(aes(x = word, y = n)) +
-  geom_bar(stat = &quot;identity&quot;) +
-  ylab(&quot;Occurrences&quot;) +
-  coord_flip()</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fb_words <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Occurrences&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>tiktok_words %&gt;%
-  count(word, sort = TRUE) %&gt;%
-  head(20) %&gt;%
-  mutate(word = reorder(word, n)) %&gt;%
-  ggplot(aes(x = word, y = n)) +
-  geom_bar(stat = &quot;identity&quot;) +
-  ylab(&quot;Occurrences&quot;) +
-  coord_flip()</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tiktok_words <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Occurrences&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
-<pre class="r"><code>fb_sentiment &lt;-    
- inner_join(fb_words, nrc, by = &quot;word&quot;) %&gt;% 
-            group_by(sentiment)  
-
-tiktok_sentiment &lt;-    
- inner_join(tiktok_words, nrc, by = &quot;word&quot;) %&gt;% 
-            group_by(sentiment) 
-
-fb_words %&gt;% head()</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fb_sentiment <span class="ot">&lt;-</span>    </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">inner_join</span>(fb_words, nrc, <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">group_by</span>(sentiment)  </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>tiktok_sentiment <span class="ot">&lt;-</span>    </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">inner_join</span>(tiktok_words, nrc, <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">group_by</span>(sentiment) </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>fb_words <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   status_id            source          created_at          word        
 ##   &lt;chr&gt;                &lt;chr&gt;           &lt;dttm&gt;              &lt;chr&gt;       
@@ -464,85 +546,85 @@ fb_words %&gt;% head()</code></pre>
 ## 5 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 check       
 ## 6 x1382020080343470082 Twitter Web App 2021-04-13 17:17:18 kindness</code></pre>
 <p>Here we compare the sentiment between Facebook and TikTok. It looks like discussions surrounding Facebook uses more trust words while topics about TikTok uses more words that reflect anticipation.</p>
-<pre class="r"><code>fb_sentiment_analysis &lt;- fb_sentiment %&gt;% 
-  count(word, sentiment) %&gt;% 
-  group_by(sentiment)
-
-fb_sentiment_analysis %&gt;%  
-  top_n(15) %&gt;% 
-  ggplot(aes(x = sentiment, y = n )) +
-  geom_bar(stat = &quot;identity&quot;) +
-  coord_flip() +
-  ylab(&quot;Frequency&quot;) +
-  xlab(&quot;Sentiment&quot;) +
-  labs(title=&quot;Facebook Sentiment&quot;)</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fb_sentiment_analysis <span class="ot">&lt;-</span> fb_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>fb_sentiment_analysis <span class="sc">%&gt;%</span>  </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sentiment, <span class="at">y =</span> n )) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sentiment&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Facebook Sentiment&quot;</span>)</span></code></pre></div>
 <pre><code>## Selecting by n</code></pre>
 <p><img src="HW09_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<pre class="r"><code>tiktok_sentiment_analysis &lt;- tiktok_sentiment %&gt;% 
-  count(word, sentiment) %&gt;% 
-  group_by(sentiment)
-
-tiktok_sentiment_analysis %&gt;%  
-  top_n(15) %&gt;% 
-  ggplot(aes(x = sentiment, y = n )) +
-  geom_bar(stat = &quot;identity&quot;) +
-  coord_flip() +
-  ylab(&quot;Frequency&quot;) +
-  xlab(&quot;Sentiment&quot;) +
-  labs(title=&quot;TikTok Sentiment&quot;)</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tiktok_sentiment_analysis <span class="ot">&lt;-</span> tiktok_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>tiktok_sentiment_analysis <span class="sc">%&gt;%</span>  </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sentiment, <span class="at">y =</span> n )) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sentiment&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;TikTok Sentiment&quot;</span>)</span></code></pre></div>
 <pre><code>## Selecting by n</code></pre>
 <p><img src="HW09_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
-<pre class="r"><code>fb_sentiment_analysis %&gt;% filter(!sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
-  mutate(sentiment = reorder(sentiment, -n),
-         word = reorder(word, -n)) %&gt;% top_n(10) -&gt; fb_sentiment_analysis2</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fb_sentiment_analysis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>sentiment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;positive&quot;</span>, <span class="st">&quot;negative&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">reorder</span>(sentiment, <span class="sc">-</span>n),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">word =</span> <span class="fu">reorder</span>(word, <span class="sc">-</span>n)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="ot">-&gt;</span> fb_sentiment_analysis2</span></code></pre></div>
 <pre><code>## Selecting by n</code></pre>
-<pre class="r"><code>ggplot(fb_sentiment_analysis2, aes(x=word, y=n, fill = n)) +
-  facet_wrap(~ sentiment, scales = &quot;free&quot;)+ 
-  geom_bar(stat =&quot;identity&quot;) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
-  labs(y=&quot;count&quot;, title=&quot;Facebook Sentiment&quot;)</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fb_sentiment_analysis2, <span class="fu">aes</span>(<span class="at">x=</span>word, <span class="at">y=</span>n, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sentiment, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;count&quot;</span>, <span class="at">title=</span><span class="st">&quot;Facebook Sentiment&quot;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<pre class="r"><code>tiktok_sentiment_analysis %&gt;% filter(!sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
-  mutate(sentiment = reorder(sentiment, -n),
-         word = reorder(word, -n)) %&gt;% top_n(10) -&gt; tiktok_sentiment_analysis2</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tiktok_sentiment_analysis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>sentiment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;positive&quot;</span>, <span class="st">&quot;negative&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">reorder</span>(sentiment, <span class="sc">-</span>n),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">word =</span> <span class="fu">reorder</span>(word, <span class="sc">-</span>n)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="ot">-&gt;</span> tiktok_sentiment_analysis2</span></code></pre></div>
 <pre><code>## Selecting by n</code></pre>
-<pre class="r"><code>ggplot(tiktok_sentiment_analysis2, aes(x=word, y=n, fill = n)) +
-  facet_wrap(~ sentiment, scales = &quot;free&quot;)+ 
-  geom_bar(stat =&quot;identity&quot;) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
-  labs(y=&quot;count&quot;, title=&quot;Tik Tok Sentiment&quot;)</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tiktok_sentiment_analysis2, <span class="fu">aes</span>(<span class="at">x=</span>word, <span class="at">y=</span>n, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sentiment, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="sc">+</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;count&quot;</span>, <span class="at">title=</span><span class="st">&quot;Tik Tok Sentiment&quot;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>We also want to visualize common words on Facebook and Tiktok by Wordcloud. The visual depiction indicates to us that “learn”, “center” and “report” are common words, with more secondary common words such as “secure” page“, and”visit" for Facebook account engagement. This could be that Facebook users tweet about account issues. Whereas, TikTok has “top”, “tomorrow”, and “prizes” as common words, and more secondary common words such as “winner,”nominating“, and”grand", indicating that the social media platform likes to promote competitions or giveaways, which makes sense given their younger demographics might enjoy these types of rewards and games.</p>
-<pre class="r"><code>facebook_cloud &lt;- fb_words  %&gt;% count(word) %&gt;% arrange(-n)
-wordcloud(facebook_cloud$word, facebook_cloud$n, max.words = 200, colors = c(&quot;#00B2FF&quot;, &quot;red&quot;, &quot;#FF0099&quot;, &quot;#6600CC&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;blue&quot;, &quot;brown&quot;))</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>facebook_cloud <span class="ot">&lt;-</span> fb_words  <span class="sc">%&gt;%</span> <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>n)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(facebook_cloud<span class="sc">$</span>word, facebook_cloud<span class="sc">$</span>n, <span class="at">max.words =</span> <span class="dv">200</span>, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;#00B2FF&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;#FF0099&quot;</span>, <span class="st">&quot;#6600CC&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;brown&quot;</span>))</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<pre class="r"><code>tiktok_cloud &lt;- tiktok_words  %&gt;% count(word) %&gt;% arrange(-n)
-wordcloud(tiktok_cloud$word, tiktok_cloud$n, max.words = 200, colors = c(&quot;#00B2FF&quot;, &quot;red&quot;, &quot;#FF0099&quot;, &quot;#6600CC&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;blue&quot;, &quot;brown&quot;))</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>tiktok_cloud <span class="ot">&lt;-</span> tiktok_words  <span class="sc">%&gt;%</span> <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>n)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(tiktok_cloud<span class="sc">$</span>word, tiktok_cloud<span class="sc">$</span>n, <span class="at">max.words =</span> <span class="dv">200</span>, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;#00B2FF&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;#FF0099&quot;</span>, <span class="st">&quot;#6600CC&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;brown&quot;</span>))</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <p>Next, we examine texts on Facebook and Tiktok to see their positive-negative score by using the AFINN sentiment lexicon, a list of English terms manually rated for valence with an integer between -5 (negative) and +5 (positive) by Finn Årup Nielsen between 2009 and 2011.</p>
 <p>We use this lexicon to compute mean positivity scores for all words tweeted by each user.</p>
-<pre class="r"><code># run this to get afinn lexicon and save it as a csv
-# get_sentiments (&quot;afinn&quot;) -&gt; afinn
-#
-#afinn %&gt;% write_as_csv(&quot;afinn.csv&quot;)
-afinn &lt;- read_csv(&#39;afinn.csv&#39;)
-fb_afinn &lt;-    
- inner_join(fb_words, 
-            afinn, 
-            by = &quot;word&quot;) 
-tiktok_afinn &lt;-    
- inner_join(tiktok_words, 
-            afinn, 
-            by = &quot;word&quot;)
-fb_mean_afinn &lt;- 
-  fb_afinn %&gt;% 
-  summarise(mean_fb_afinn = mean(value))
-tiktok_mean_afinn &lt;- 
-  tiktok_afinn %&gt;% 
-  summarise(mean_tt_afinn = mean(value))
-cat(paste0(&quot;Average AFINN scores for all words by user\n&quot;,
-           &quot;\nFacebook: &quot;, round(fb_mean_afinn, 3), 
-           &quot;\nTikTok: &quot;, round(tiktok_mean_afinn, 3)))</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this to get afinn lexicon and save it as a csv</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get_sentiments (&quot;afinn&quot;) -&gt; afinn</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#afinn %&gt;% write_as_csv(&quot;afinn.csv&quot;)</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>afinn <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;afinn.csv&#39;</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>fb_afinn <span class="ot">&lt;-</span>    </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">inner_join</span>(fb_words, </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>            afinn, </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) </span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>tiktok_afinn <span class="ot">&lt;-</span>    </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">inner_join</span>(tiktok_words, </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>            afinn, </span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="st">&quot;word&quot;</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>fb_mean_afinn <span class="ot">&lt;-</span> </span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  fb_afinn <span class="sc">%&gt;%</span> </span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_fb_afinn =</span> <span class="fu">mean</span>(value))</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>tiktok_mean_afinn <span class="ot">&lt;-</span> </span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  tiktok_afinn <span class="sc">%&gt;%</span> </span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_tt_afinn =</span> <span class="fu">mean</span>(value))</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&quot;Average AFINN scores for all words by user</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Facebook: &quot;</span>, <span class="fu">round</span>(fb_mean_afinn, <span class="dv">3</span>), </span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">TikTok: &quot;</span>, <span class="fu">round</span>(tiktok_mean_afinn, <span class="dv">3</span>)))</span></code></pre></div>
 <pre><code>## Average AFINN scores for all words by user
 ## 
 ## Facebook: 0.785
@@ -555,124 +637,124 @@ cat(paste0(&quot;Average AFINN scores for all words by user\n&quot;,
 <p>The features we extracted are tweet length, the presence of a picture/link, number of words for each sentiment, and mean AFINN score per tweet.</p>
 <p>TikTok is encoded as 1, and Facebook is encoded as 0.</p>
 <p>First, we produce a simple decision tree.</p>
-<pre class="r"><code>fb_piclinks &lt;-
-  facebook %&gt;%
-  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
-  mutate(picture_link = ifelse(str_detect(text, &quot;t.co&quot;),
-                         1, 0)) %&gt;% 
-  select(1,5)
-tiktok_piclinks &lt;- 
-  tiktok %&gt;%
-  filter(!str_detect(text, &#39;^&quot;&#39;)) %&gt;%
-  mutate(picture_link = ifelse(str_detect(text, &quot;t.co&quot;),
-                         1, 0)) %&gt;% 
-  select(1,5)
-fb_tweet_afinn &lt;- 
-  fb_afinn %&gt;% 
-  group_by(status_id) %&gt;% 
-  summarize(afinn = mean(value))</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fb_piclinks <span class="ot">&lt;-</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  facebook <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">picture_link =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(text, <span class="st">&quot;t.co&quot;</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                         <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>tiktok_piclinks <span class="ot">&lt;-</span> </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  tiktok <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">picture_link =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(text, <span class="st">&quot;t.co&quot;</span>),</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                         <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>fb_tweet_afinn <span class="ot">&lt;-</span> </span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  fb_afinn <span class="sc">%&gt;%</span> </span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">afinn =</span> <span class="fu">mean</span>(value))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>tiktok_tweet_afinn &lt;- 
-  tiktok_afinn %&gt;% 
-  group_by(status_id) %&gt;% 
-  summarize(afinn = mean(value))</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>tiktok_tweet_afinn <span class="ot">&lt;-</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  tiktok_afinn <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">afinn =</span> <span class="fu">mean</span>(value))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>fb_sentiment_counts &lt;- 
-  fb_sentiment %&gt;% 
-  group_by(status_id) %&gt;% 
-  count(sentiment) %&gt;% 
-  pivot_wider(id_cols = status_id, 
-              names_from = sentiment, 
-              values_from = n,
-              values_fill = 0)
-tiktok_sentiment_counts &lt;- 
-  tiktok_sentiment %&gt;% 
-  group_by(status_id) %&gt;% 
-  count(sentiment) %&gt;% 
-  pivot_wider(id_cols = status_id, 
-              names_from = sentiment, 
-              values_from = n,
-              values_fill = 0)
-tiktok_feature_selection &lt;- 
-  tiktok_wordcounts %&gt;% 
-  mutate(user = 1) %&gt;% 
-  left_join(tiktok_sentiment_counts, 
-            by=&quot;status_id&quot;) %&gt;% 
-  left_join(tiktok_tweet_afinn,
-            by=&quot;status_id&quot;) %&gt;% 
-  left_join(tiktok_piclinks,
-            by=&quot;status_id&quot;)
-facebook_feature_selection &lt;-
-  fb_wordcounts %&gt;% 
-  mutate(user = 0) %&gt;% 
-  left_join(fb_sentiment_counts, 
-            by=&quot;status_id&quot;) %&gt;% 
-  left_join(fb_tweet_afinn,
-            by=&quot;status_id&quot;) %&gt;% 
-  left_join(fb_piclinks,
-            by=&quot;status_id&quot;)
-both_users &lt;- 
-  tiktok_feature_selection %&gt;% 
-  rbind(facebook_feature_selection) %&gt;%
-  mutate_if(is.numeric,coalesce,0)
-set.seed(123)
-index &lt;- 
-  createDataPartition(both_users$user,
-                      p = 0.8, list = FALSE)
-for_decisiontree &lt;-
-  both_users %&gt;% select(-1,-2,-3,-4) %&gt;% 
-  drop_na()
-train &lt;- for_decisiontree[index, ]</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fb_sentiment_counts <span class="ot">&lt;-</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  fb_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> status_id, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> sentiment, </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> n,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>tiktok_sentiment_counts <span class="ot">&lt;-</span> </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  tiktok_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> status_id, </span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> sentiment, </span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> n,</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>tiktok_feature_selection <span class="ot">&lt;-</span> </span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  tiktok_wordcounts <span class="sc">%&gt;%</span> </span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">user =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tiktok_sentiment_counts, </span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="st">&quot;status_id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tiktok_tweet_afinn,</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="st">&quot;status_id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tiktok_piclinks,</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="st">&quot;status_id&quot;</span>)</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>facebook_feature_selection <span class="ot">&lt;-</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>  fb_wordcounts <span class="sc">%&gt;%</span> </span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">user =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(fb_sentiment_counts, </span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="st">&quot;status_id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(fb_tweet_afinn,</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="st">&quot;status_id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(fb_piclinks,</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="st">&quot;status_id&quot;</span>)</span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>both_users <span class="ot">&lt;-</span> </span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>  tiktok_feature_selection <span class="sc">%&gt;%</span> </span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(facebook_feature_selection) <span class="sc">%&gt;%</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric,coalesce,<span class="dv">0</span>)</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> </span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">createDataPartition</span>(both_users<span class="sc">$</span>user,</span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>                      <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>for_decisiontree <span class="ot">&lt;-</span></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>  both_users <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> for_decisiontree[index, ]</span></code></pre></div>
 <pre><code>## Warning: The `i` argument of ``[`()` can&#39;t be a matrix as of tibble 3.0.0.
 ## Convert to a vector.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<pre class="r"><code>test  &lt;- for_decisiontree[-index, ]
-set.seed(123)
-simple_model &lt;- rpart(user ~ ., 
-                      data = train, method = &quot;class&quot;)
-rpart.plot(simple_model, yesno = 2)</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>test  <span class="ot">&lt;-</span> for_decisiontree[<span class="sc">-</span>index, ]</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>simple_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(user <span class="sc">~</span> ., </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> train, <span class="at">method =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(simple_model, <span class="at">yesno =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>We produce additional models using the bagging, random forests, and gradient boosting methods.</p>
-<pre class="r"><code>set.seed(123)
-bagging_model &lt;- train(
-  user ~ .,
-  data = train,
-  method = &quot;treebag&quot;,
-  trControl = trainControl(method = &quot;oob&quot;),
-  keepX = T,
-  nbagg = 100,
-  importance = &quot;impurity&quot;,
-  control = rpart.control(minsplit = 2, cp = 0)
-)
-n_features &lt;- length(setdiff(names(train), &quot;user&quot;))
-rf_model &lt;- ranger(
-  user ~ .,
-  data = train,
-  mtry = floor(n_features * 0.5),
-  respect.unordered.factors = &quot;order&quot;,
-  importance = &quot;permutation&quot;,
-  seed = 123
-)
-set.seed(123)  # for reproducibility
-gbm_model &lt;- gbm(
-  formula = user ~ .,
-  data = train,
-  distribution = &quot;gaussian&quot;,  # SSE loss function
-  n.trees = 1000,
-  shrinkage = 0.05,
-  interaction.depth = 5,
-  n.minobsinnode = 4,
-  cv.folds = 10
-)</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>bagging_model <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  user <span class="sc">~</span> .,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;treebag&quot;</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;oob&quot;</span>),</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">keepX =</span> T,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">nbagg =</span> <span class="dv">100</span>,</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">importance =</span> <span class="st">&quot;impurity&quot;</span>,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">2</span>, <span class="at">cp =</span> <span class="dv">0</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>n_features <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">setdiff</span>(<span class="fu">names</span>(train), <span class="st">&quot;user&quot;</span>))</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  user <span class="sc">~</span> .,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">mtry =</span> <span class="fu">floor</span>(n_features <span class="sc">*</span> <span class="fl">0.5</span>),</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">respect.unordered.factors =</span> <span class="st">&quot;order&quot;</span>,</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">importance =</span> <span class="st">&quot;permutation&quot;</span>,</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>gbm_model <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> user <span class="sc">~</span> .,</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,  <span class="co"># SSE loss function</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">1000</span>,</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.05</span>,</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">5</span>,</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="dv">4</span>,</span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">cv.folds =</span> <span class="dv">10</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>We also display four variable importance plots to see which variables each model identified as significant.</p>
-<pre class="r"><code>vip(simple_model, num_features = 30) + ggtitle(&#39;Simple Decision Tree - Variable Importance Plot&#39;)</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vip</span>(simple_model, <span class="at">num_features =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&#39;Simple Decision Tree - Variable Importance Plot&#39;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<pre class="r"><code>vip(bagging_model, num_features = 30) + ggtitle(&#39;Bagging - Variable Importance Plot&#39;)</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vip</span>(bagging_model, <span class="at">num_features =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&#39;Bagging - Variable Importance Plot&#39;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
-<pre class="r"><code>vip(rf_model, num_features = 30) + ggtitle(&#39;Random Forests - Variable Importance Plot&#39;)</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vip</span>(rf_model, <span class="at">num_features =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&#39;Random Forests - Variable Importance Plot&#39;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-16-3.png" width="672" /></p>
-<pre class="r"><code>vip(gbm_model, num_features = 30) + ggtitle(&#39;Gradient Boosting - Variable Importance Plot&#39;)</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vip</span>(gbm_model, <span class="at">num_features =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&#39;Gradient Boosting - Variable Importance Plot&#39;</span>)</span></code></pre></div>
 <p><img src="HW09_files/figure-html/unnamed-chunk-16-4.png" width="672" /></p>
 <p>It seems that the simple decision tree placed the most importance on the presence of a picture/link. The bagging model, on the other hand places no importance on this variable. All four methods identified tweet length as strongly predictive of the user. All four heavily weighted anticipation sentiments and AFINN scores.</p>
 </div>
@@ -854,15 +936,15 @@ Gradient Boosting
 </table>
 <p>The rankings for accuracy on the training set are as follows: 1. Bagging method 2. Random forests 3. Gradient boosting method 4. Simple decision tree</p>
 <p>We show the residual sum of squares for all four models on the training set below.</p>
-<pre class="r"><code>rss_simple_train &lt;- sum((actual_train-simple_pred_train)^2)
-rss_bagging_train &lt;- sum((actual_train-bagging_pred_train)^2)
-rss_rf_train &lt;- sum((actual_train-rf_pred_train)^2)
-rss_gb_train &lt;- sum((actual_train-gb_pred_train)^2)
-cat(paste0(&quot;Residual Sum of Squares on Training Set\n&quot;,
-           &quot;\nSimple model: &quot;, rss_simple_train, 
-           &quot;\nBagging model: &quot;, rss_bagging_train, 
-           &quot;\nRandom forests model: &quot;, rss_rf_train, 
-           &quot;\nGradient boosting model: &quot;, rss_gb_train))</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>rss_simple_train <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_train<span class="sc">-</span>simple_pred_train)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>rss_bagging_train <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_train<span class="sc">-</span>bagging_pred_train)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>rss_rf_train <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_train<span class="sc">-</span>rf_pred_train)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>rss_gb_train <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_train<span class="sc">-</span>gb_pred_train)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&quot;Residual Sum of Squares on Training Set</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Simple model: &quot;</span>, rss_simple_train, </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Bagging model: &quot;</span>, rss_bagging_train, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Random forests model: &quot;</span>, rss_rf_train, </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Gradient boosting model: &quot;</span>, rss_gb_train))</span></code></pre></div>
 <pre><code>## Residual Sum of Squares on Training Set
 ## 
 ## Simple model: 744.823130490417
@@ -875,22 +957,22 @@ cat(paste0(&quot;Residual Sum of Squares on Training Set\n&quot;,
 <div id="test-set-performance" class="section level2">
 <h2>Test Set Performance</h2>
 <p><strong>Simple Decision Tree - Test Set:</strong></p>
-<pre class="r"><code>actual_test &lt;- test$user
-simple_pred_test &lt;- 
-  predict(simple_model, newdata = test) %&gt;% 
-  as_tibble() %&gt;% 
-  select(2) %&gt;% 
-  unlist() %&gt;% 
-  as.vector()
-simple_test_confusion &lt;- 
-  confusionMatrix(data = factor(round(simple_pred_test)),
-                  reference = factor(actual_test), mode = &quot;prec_recall&quot;)
-simple_test_errors &lt;- 
-  simple_test_confusion$table[2] +
-  simple_test_confusion$table[3]
-simple_test_accuracy &lt;-
-  as.numeric(simple_test_confusion$overall[1])
-simple_test_confusion</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>actual_test <span class="ot">&lt;-</span> test<span class="sc">$</span>user</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>simple_pred_test <span class="ot">&lt;-</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(simple_model, <span class="at">newdata =</span> test) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vector</span>()</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>simple_test_confusion <span class="ot">&lt;-</span> </span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">confusionMatrix</span>(<span class="at">data =</span> <span class="fu">factor</span>(<span class="fu">round</span>(simple_pred_test)),</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">reference =</span> <span class="fu">factor</span>(actual_test), <span class="at">mode =</span> <span class="st">&quot;prec_recall&quot;</span>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>simple_test_errors <span class="ot">&lt;-</span> </span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  simple_test_confusion<span class="sc">$</span>table[<span class="dv">2</span>] <span class="sc">+</span></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>  simple_test_confusion<span class="sc">$</span>table[<span class="dv">3</span>]</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>simple_test_accuracy <span class="ot">&lt;-</span></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(simple_test_confusion<span class="sc">$</span>overall[<span class="dv">1</span>])</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>simple_test_confusion</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -1069,15 +1151,15 @@ Gradient Boosting
 <li>Simple decision tree</li>
 </ol>
 <p>Now, we show the residual sum of squares for each model with respect to the test set.</p>
-<pre class="r"><code>rss_simple_test &lt;- sum((actual_test-simple_pred_test)^2)
-rss_bagging_test &lt;- sum((actual_test-bagging_pred_test)^2)
-rss_rf_test &lt;- sum((actual_test-rf_pred_test)^2)
-rss_gb_test &lt;- sum((actual_test-gb_pred_test)^2)
-cat(paste0(&quot;Residual Sum of Squares on Test Set\n&quot;,
-           &quot;\nSimple model: &quot;, rss_simple_test, 
-           &quot;\nBagged model: &quot;, rss_bagging_test, 
-           &quot;\nRandom forests model: &quot;, rss_rf_test, 
-           &quot;\nGradient boost model: &quot;, rss_gb_test))</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>rss_simple_test <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_test<span class="sc">-</span>simple_pred_test)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>rss_bagging_test <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_test<span class="sc">-</span>bagging_pred_test)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>rss_rf_test <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_test<span class="sc">-</span>rf_pred_test)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>rss_gb_test <span class="ot">&lt;-</span> <span class="fu">sum</span>((actual_test<span class="sc">-</span>gb_pred_test)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&quot;Residual Sum of Squares on Test Set</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Simple model: &quot;</span>, rss_simple_test, </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Bagged model: &quot;</span>, rss_bagging_test, </span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Random forests model: &quot;</span>, rss_rf_test, </span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Gradient boost model: &quot;</span>, rss_gb_test))</span></code></pre></div>
 <pre><code>## Residual Sum of Squares on Test Set
 ## 
 ## Simple model: 185.903238689494
