@@ -2,9 +2,7 @@
 title: "Homework 10 - Alligators"
 author: "Ammar Plumber, Elaina Lin, Kim Nguyen, Meghan Aines, and Ryan Karbowicz"
 date: "4/27/2021"
-output:
-  html_document:
-    df_print: paged
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
