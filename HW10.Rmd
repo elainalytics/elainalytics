@@ -1,6 +1,6 @@
 ---
-title: "Homework 10 - Alligators"
-author: "Ammar Plumber, Elaina Lin, Kim Nguyen, Meghan Aines, and Ryan Karbowicz"
+title: "Homework 10"
+author: "Elaina Lin"
 date: "4/27/2021"
 output: html_document
 ---
@@ -378,6 +378,7 @@ summary(lm(between ~ as.factor(trait), data = tree_bt))
 
 ```
 
-
+Contributions:
+Ammar Plumber, Elaina Lin, Kim Nguyen, Ryan Karbowicz
 
 
