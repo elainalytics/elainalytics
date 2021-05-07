@@ -11,23 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This document contains the survey results from the survey we ran in class.
-1. Prepare the data for the network analysis (create a separate edge and node list)
-2. Calculate measures of centrality and similarity in networks depending on the type of tie? Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
-3. Do introverts tend to be at the periphery while extraverts are in the center of the network? Motivate.
-
-
-The options for each name are the following:
-1. I have texted in the last 7 days
-2. I have met during my time in MBDS
-3. Is my friend
-4. I ask for advice/help
-5. Asks me for help/advice
-Options for the introversion question:
-1. Introverted
-2. Middle ground
-3. Extraverted
-
 ```{r}
 # Load packages and an xls file
 library(readxl)
@@ -40,10 +23,9 @@ hw10<- read_excel("hw10.xlsx")
 node<- read_excel("hw10.xlsx", skip = 1)
 colnames(node) <- c("ID", 1:40, "trait") 
 
-# Does node have a correct format. I'm not sure how it suppose to be
 ```
 
-##1. Prepare the data for the network analysis (create a separate edge and node list)
+## 1. Prepare the data for the network analysis (create a separate edge and node list)
 ```{r}
 #create the edge list
 edge_prep <- node %>% pivot_longer(col = -c(ID, trait), names_to = "in-tie", values_to = "value") %>% 
@@ -59,7 +41,7 @@ edgelist <- na.omit(edgelist)
 edgelist <- edgelist %>%
   arrange(`out-tie`) %>% 
   filter(`out-tie` != `in-tie`)
-##there are 3 variables in the edge list: out-tie, in-tie, and tie.
+#there are 3 variables in the edge list: out-tie, in-tie, and tie.
 
 
 #creating nodelist
@@ -71,7 +53,7 @@ nodelist <-rbind (inclass, absent_people) %>% arrange(`ID`) #combine  people too
 
 ```
 
-##2. Calculate measures of centrality and similarity in networks depending on the type of tie? Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
+## 2. Calculate measures of centrality and similarity in networks depending on the type of tie? Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
 
 Looking at the information centrality, tie type 4 (I ask for advice/help) has the greatest centralization while tie type 5 (Asks me for help/advice). Betweenness is also another measure of centrality which shows us how well-connected the parts are. In terms of betweenness, tie type 3 (Is my friend ) ranks the highest and tie type 2 (I have met during my time in MBDS) is the lowest.  Likewise, tie type 3 also ranks the highest for reciprocity, though tie type 4 ranks the lowest. As for closeness, tie type 2 ranks the closest and tie type 3 is the least closest.
 
@@ -231,8 +213,6 @@ mean(closeness(network_class_tietype4, mode="all", weights=NA))
 mean(closeness(network_class_tietype5, mode="all", weights=NA))
 ```
 
-
-
 **Betweenness**  
 
 Betweenness is the shortest paths between nodes that go through a given node  
@@ -246,8 +226,6 @@ From most betweenness to least betweenness, the rank of ties in terms of between
 5. I have met during my time in MBDS  (tie type 2)
 
 
-
-
 ```{r}
 
 mean(betweenness(network_class_tietype1, directed=F, weights=NA))
@@ -256,9 +234,6 @@ mean(betweenness(network_class_tietype3, directed=F, weights=NA))
 mean(betweenness(network_class_tietype4, directed=F, weights=NA))
 mean(betweenness(network_class_tietype5, directed=F, weights=NA))
 ```
-
-
-
 
 
 **Degree**  
@@ -323,7 +298,7 @@ mean_distance(network_class_tietype5, directed=T)
 
 
 
-## Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
+## 3. Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
 
 In terms of introversion...  
 **Most similar network:** "I have texted in the last 7 days"  
@@ -381,8 +356,5 @@ summary(lm(between ~ as.factor(trait), data = tree_bt))
 ```
 
 Contributions:
-Kim: Q1
-Ryan and Ammar: Q2
-Elaina and Meghan: Q3
-
+Kim: Q1; Ryan and Ammar: Q2; Elaina and Meghan: Q3
 
