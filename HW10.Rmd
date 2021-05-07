@@ -25,7 +25,7 @@ colnames(node) <- c("ID", 1:40, "trait")
 
 ```
 
-## 1. Prepare the data for the network analysis (create a separate edge and node list)
+### 1. Prepare the data for the network analysis (create a separate edge and node list)
 ```{r}
 #create the edge list
 edge_prep <- node %>% pivot_longer(col = -c(ID, trait), names_to = "in-tie", values_to = "value") %>% 
@@ -53,7 +53,7 @@ nodelist <-rbind (inclass, absent_people) %>% arrange(`ID`) #combine  people too
 
 ```
 
-## 2. Calculate measures of centrality and similarity in networks depending on the type of tie? Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
+### 2. Calculate measures of centrality and similarity in networks depending on the type of tie? Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
 
 Looking at the information centrality, tie type 4 (I ask for advice/help) has the greatest centralization while tie type 5 (Asks me for help/advice). Betweenness is also another measure of centrality which shows us how well-connected the parts are. In terms of betweenness, tie type 3 (Is my friend ) ranks the highest and tie type 2 (I have met during my time in MBDS) is the lowest.  Likewise, tie type 3 also ranks the highest for reciprocity, though tie type 4 ranks the lowest. As for closeness, tie type 2 ranks the closest and tie type 3 is the least closest.
 
@@ -298,7 +298,7 @@ mean_distance(network_class_tietype5, directed=T)
 
 
 
-## 3. Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
+### 3. Which tie type generates the most similar network in terms of introversion? Which tie type is the most dissimilar?
 
 In terms of introversion...  
 **Most similar network:** "I have texted in the last 7 days"  
@@ -326,7 +326,7 @@ assortativity(net5, V(net5)$trait, directed=T)
 
 ```
 
-##3 Do introverts tend to be at the periphery while extraverts are in the center of the network? Motivate.
+### 3. Do introverts tend to be at the periphery while extraverts are in the center of the network? Motivate.
 
 We use both decision tree and regression to examine if introverts tend to be at the periphery while extraverts are in the center of the network. The input is the trait (level of introvert/extravert) and the output is the degree/betweenness. 
 
@@ -354,7 +354,12 @@ summary(lm(between ~ as.factor(trait), data = tree_bt))
 
 
 ```
+### Contributions 
 
-Contributions:
-Kim: Q1; Ryan and Ammar: Q2; Elaina and Meghan: Q3
+Q1: Kim Nguyen
+
+Q2: Ryan Karbowicz & Ammar Plumber
+
+Q3: Elaina Lin & Meghan Aines
+
 
