@@ -379,6 +379,8 @@ summary(lm(between ~ as.factor(trait), data = tree_bt))
 ```
 
 Contributions:
-Ammar Plumber, Elaina Lin, Kim Nguyen, Ryan Karbowicz
+Kim: Q1
+Ryan and Ammar: Q2
+Elaina and Meghan: Q3
 
 
